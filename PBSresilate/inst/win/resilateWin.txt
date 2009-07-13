@@ -1,0 +1,8 @@
+window title="Resilate" #onClose=.onClose
+
+#-----------------------------------------------------
+label text="Model" font="bold 11" fg="orangered" sticky=SW
+#---runResilate() will populate grid with radio buttons below---
+grid 0 1
+	radio name=model mode=character sticky=W function=doAction text="Clear models" \
+		value="none" action="closeWin(`modwin`)" selected=TRUE

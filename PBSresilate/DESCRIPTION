@@ -1,0 +1,15 @@
+Package: PBSresilate
+Version: 0.13
+Date: 2009-02-18
+Title: PBSresilate 0.13
+Author: Jon T. Schnute <Jon.Schnute@dfo-mpo.gc.ca>,
+  Rowan Haigh <Rowan.Haigh@dfo-mpo.gc.ca>
+Maintainer: Jon Schnute <Jon.Schnute@dfo-mpo.gc.ca>
+Depends: R (>= 2.7.0), PBSmodelling, PBSddesolve, deSolve, rgl
+Description: This package uses an interactive GUI to control solvers, 
+  calculate states, and display results in 2D or 3D plots for 
+  published 3-state models (specifically their derivative formulae).
+  The current name reflects resilience theory and emphasizes a close 
+  association with other PBS packages, particularly 'PBSmodelling'.
+License: GPL (>= 2)
+Packaged: Wed Feb 18 15:06:27 2009; haighr
