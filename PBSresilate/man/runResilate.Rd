@@ -10,7 +10,7 @@ runResilate()
 }
 \details{
   Looks at the names of R-code (\code{*.r}) in the folder
-  \code{...\PBSresilate\examples} and uses the prefixes as 
+  \samp{.../PBSresilate/examples} and uses the prefixes as 
   available models.
 }
 \value{

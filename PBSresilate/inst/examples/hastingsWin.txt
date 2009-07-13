@@ -6,7 +6,7 @@ grid 4 1 relief=sunken sticky=NW
 grid 1 4 sticky=NW pady=5
 	label text="View " font="bold 11" fg=green4
 	button text=Docs func=doAction action="openFile(paste(system.file(package=`PBSresilate`),`/examples/resilateDoc.pdf`,sep=``))"
-	button text="R Code" func=viewCode action=resilate.r
+	button text="R Code" func=doAction action="viewCode(`PBSresilate`)"
 	button text=Window func=openFile action=resilateWin.txt
 
 #-----------------------------------------------------
