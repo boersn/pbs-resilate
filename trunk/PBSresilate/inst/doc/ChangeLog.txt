@@ -1,5 +1,10 @@
 PBSresilate Changes
 ===================
+0.14  2009-07-13  Rowan
+  - Removed redundant & deprecated functions (.isReallyNull, convSlashes, doAction, showPacks, viewCode, .findPrefix)
+  - Removed usage of "<<-"; replaced with 'packList()'.
+  - Changed call from button 'R code' to invoke 'viewCode("PBSresilate").
+
 0.13  2009-02-18  Jon
   - Added new history files and revised PDFs (lorenz, ludwig. resilenz).
 

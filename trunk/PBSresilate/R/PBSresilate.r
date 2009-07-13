@@ -1,4 +1,4 @@
-#runResilate----------------------------2009-02-17
+#runResilate----------------------------2009-07-13
 # Start the model choice for resilate (dynamic).
 #-----------------------------------------------RH
 runResilate =  function () {
@@ -11,7 +11,7 @@ runResilate =  function () {
 	edir=.getPkgPath(pkg,"examples")            # examples directory
 	tdir=tempdir(); tdir=gsub("\\\\","/",tdir)  # temporary directory
 	temp=readLines(paste(wdir,"/resilateWin.txt",sep="")); 
-	mods=.findPrefix(".r",edir)
+	mods=getPrefix(".r",edir)
 	mrad=character(0)
 	for (i in mods) 
 		mrad=c(mrad,paste("\tradio name=model mode=character sticky=W function=resilate ",
@@ -25,7 +25,7 @@ runResilate =  function () {
 	invisible() }
 #--------------------------------------runResilate
 
-#resilate-------------------------------2009-02-17
+#resilate-------------------------------2009-007-13
 # Resilate the universe.
 #-----------------------------------------------RH
 resilate =  function (model=NULL,hnam=NULL) {
@@ -34,11 +34,11 @@ resilate =  function (model=NULL,hnam=NULL) {
 	if (!require(deSolve))      showAlert("Intall package 'deSolve'")
 	if (!require(rgl))          showAlert("Intall package 'rgl'")
 	pkg="PBSresilate"
-	PBSresi <<- list(pkg=pkg,func="resilate")
-	if (is.null(model) && exists(".PBSmod",where=1) && !PBSmodelling:::.isReallyNull(.PBSmod,"window")) 
+	assign("PBSresi",list(pkg=pkg,func="resilate"),envir=.GlobalEnv)
+	if (is.null(model) && exists(".PBSmod",where=1) && !is.null(.PBSmod[["window"]]) ) 
 		model=getWinVal(winName="window")$model
 	if (is.null(model) || model=="" || model=="none") model="lorenz"
-	PBSresi$model<<-model
+	packList("model","PBSresi")
 
 	wdir=.getPkgPath(pkg,"win")                 # window directory
 	edir=.getPkgPath(pkg,"examples")            # examples directory
@@ -50,11 +50,11 @@ resilate =  function (model=NULL,hnam=NULL) {
 	ehis <- paste(model,"Hist.txt",sep="")      # name of history file
 	ehis <- paste(edir,ehis,sep="/")            # history file in examples directory
 	wtmp <- paste(tdir,wnam,sep="/")
-	rtmp <- paste(tdir,"resilate.r",sep="/")
+	#rtmp <- paste(tdir,"resilate.r",sep="/")
 	temp <- readLines(wdf); ptemp=readLines(pwdf)
 	temp <- gsub("action=resilateWin.txt",paste("action=\"",wtmp,"\"",sep=""),temp)
 	temp <- gsub("resilateDoc.pdf",paste(model,"Doc.pdf",sep=""),temp)
-	temp <- gsub("action=resilate.r",paste("action=\"",rtmp,"\"",sep=""),temp)
+	#temp <- gsub("action=resilate.r",paste("action=\"",rtmp,"\"",sep=""),temp)
 	if (is.null(hnam) && file.exists(ehis)) hnam=ehis
 	if (!is.null(hnam))
 		ptemp <- gsub("#import=\"\"",paste("import=\"",hnam,"\"",sep=""),ptemp)
@@ -68,7 +68,7 @@ resilate =  function (model=NULL,hnam=NULL) {
 	if (exists("PBSresi",envir=.GlobalEnv)) {
 		save("PBSresi",file="PBSresi.rda",envir=.GlobalEnv) } }
 
-#.calcGrad------------------------------2009-02-17
+#.calcGrad------------------------------2009-07-13
 # Calculate the gradient
 #-------------------------------------------ACB/RH
 .calcGrad <- function() {
@@ -95,12 +95,13 @@ resilate =  function (model=NULL,hnam=NULL) {
 	myCalc=function(y) { val=myGrad(t=0,y=y,parms=NULL)[[1]]; names(val)=c("dy1","dy2","dy3"); return(val) }
 	xdy = t(apply(x[,2:4],1,myCalc))
 	x=cbind(x,xdy)
-	PBSresi$x <<- x; PBSresi$states<<-states
+	packList(c("x","states"),"PBSresi")
+	#PBSresi$x <<- x; PBSresi$states<<-states
 	#.plotResi()
 	invisible() }
 #----------------------------------------.calcGrad
 
-#.plotResi------------------------------2009-02-17
+#.plotResi------------------------------2009-07-13
 # Plot the resilation
 #-----------------------------------------------RH
 .plotResi=function() {
@@ -141,9 +142,10 @@ resilate =  function (model=NULL,hnam=NULL) {
 		else fld1=fld0
 		use=fld0[xyz]; see=fld1[xyz]
 		#flds=names(x); useflds=intersect(flds,see)
-		x=x[,use]; names(x)=see; n=nrow(x)
+		x=x[,use]; names(x)=see; n=nrow(x); xnew=x
 		clrs=colorRampPalette(c("red", "orange","yellow","green","blue"),space="Lab")(n)
-		PBSresi$xnew<<-x; PBSresi$clrs <<- clrs
+		packList(c("xnew","clrs"),"PBSresi")
+		#PBSresi$xnew<<-x; PBSresi$clrs <<- clrs
 		if (p23==2) {
 			resetGraph()
 			if (type3d=="p") {upper=lower=panel.points }
@@ -154,8 +156,9 @@ resilate =  function (model=NULL,hnam=NULL) {
 		} else if (p23==3) {
 			if (sum(xyz)!=3) {showAlert("Choose 3 states"); return()}
 			xs=apply(x,2,xscale); xs=as.data.frame(xs,row.names=rownames(x))
-			xsc=sapply(x,xscale,simplify=FALSE); PBSresi$xsc<<-xsc
-			xs=as.data.frame(xsc); PBSresi$xs<<-xs
+			xsc=sapply(x,xscale,simplify=FALSE)#; PBSresi$xsc<<-xsc
+			xs=as.data.frame(xsc)#; PBSresi$xs<<-xs
+			packList(c("xsc","xs"),"PBSresi")
 			#par3d(windowRect=c(70,90,700,720)) # cannot control the size of the initial 3D window
 			plot3d(xs,col=clrs,size=size3d,top=TRUE,type=type3d,axes=FALSE,xlab="",ylab="",zlab="") # s=spheres, p=points, l=lines
 			for (i in 1:3) {
@@ -172,77 +175,6 @@ resilate =  function (model=NULL,hnam=NULL) {
 }
 #----------------------------------------.plotResi
 
-#2009-02-03-------------------------------------RH
-# Executes the action created by a widget.
-#Start doAction-----------------------------------
-doAction=function(act,envir=.GlobalEnv){
-	if (missing(act)) {
-		if(is.null(.PBSmod$.activeWin)) return()
-		act=getWinAct()[1] }
-	if(is.null(act) || act=="") return()
-	expr=gsub("`","\"",act)
-	eval(parse(text=expr),envir=envir)
-	invisible(act) }
-#-------------------------------------End doAction
-
-#viewCode-------------------------------2009-02-16
-# View the package R code on the fly.
-#-----------------------------------------------RH
-viewCode=function(pkg="PBSresilate"){
-	eval(parse(text=paste("if(!require(",pkg,",quietly=TRUE)) stop(\"",pkg," package is required\")",sep="")))
-	tdir <- tempdir(); tdir <- gsub("\\\\","/",tdir)                      # temporary directory for R
-	pkgO=ls(paste("package:",pkg,sep=""),all=TRUE)                        # package objects
-	z=sapply(pkgO,function(x){f=get(x);is.function(f)}); pkgF=names(z)[z] # package functions
-	bad=regexpr("[\\|()[{^$*+?<-]",pkgF); pkgF=pkgF[bad<0]                # get rid of weird names
-	if (length(pkgF)==0) {showAlert(paste(pkg,"has no recognizable functions")); return()}
-	dots=regexpr("^\\.",pkgF); pkgF0=pkgF[dots==1]; pkgF1=pkgF[dots!=1]
-	code=c(paste("#",pkg,"Functions"),paste("#",paste(rep("-",nchar(pkg)+10),collapse="")))
-	for (i in c(pkgF1,pkgF0)) {
-		expr=paste("fun=deparse(",pkg,"::",i,"); fun[1]=paste(\"",i,"\",fun[1],sep=\" = \",collapse=\"\"); code=c(code,fun)",sep="")
-		eval(parse(text=expr)) }
-	fname=paste(tdir,"/",pkg,".r",sep="")
-	writeLines(code, fname); openFile(convSlashes(fname))
-	invisible(code) }
-#----------------------------------------viewCode
-
-#convSlashes---------------------------2009-02-16
-# Convert unix "/" to R's "\\" if OS is windows.
-#-----------------------------------------------RH
-convSlashes=function(expr, os=.Platform$OS.type, addQuotes=FALSE){
-	if (os=="windows") expr=gsub("/","\\\\",expr)
-	else expr=gsub("\\\\","/",expr)
-	if (addQuotes) expr=paste("\"",expr,"\"",sep="")
-	return(expr) }
-
-.findSquare=function(nc) {
-	sqn=sqrt(nc); m=ceiling(sqn); n=ceiling(nc/m)
-	return(c(m,n)) }
-
 .getPkgPath=function(pkg="PBSresilate", dir="examples"){
 	return(paste(system.file(package=pkg),dir,sep="/")) }
-
-.findPrefix=function(suffix,path="."){ # to replace Anisa's findPrefix
-	spat=gsub("\\.","\\\\\\.",suffix)
-	sfiles=list.files(path,pattern=paste(spat,"$",sep=""),ignore.case=TRUE)
-	pref=substring(sfiles,1,nchar(sfiles)-nchar(suffix))
-	return(pref) }
-
-#showPacks------------------------------2009-02-17
-# Show packages that need to be installed.
-#-----------------------------------------------RH
-showPacks <- function(packs=c("PBSmodelling","PBSmapping","PBSddesolve","rgl","deSolve",
-         "akima","deldir","sp","maptools","KernSmooth")) {
-	warn <- options()$warn
-	options(warn = -1)
-	Apacks = .packages(all.available = TRUE)   # all packages
-	Ipacks = sort(findPat(packs,Apacks))       # installed packages that match those required
-	Mpacks = sort(setdiff(packs,Ipacks))       # missing packages
-	if (length(Mpacks)==0)
-		showAlert("Congratulations! All specified pakages installed.","Package Check","info")
-	else {
-		mess=paste("You need to install these packages:\n     ",paste(Mpacks,collapse="\n     "),sep="")
-		showAlert(mess,"Package Check","warning")
-	}
-	options(warn = warn)
-	invisible(list(Apacks=Apacks,Ipacks=Ipacks,Mpacks=Mpacks)) }
 
