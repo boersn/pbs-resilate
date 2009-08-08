@@ -1,0 +1,22 @@
+window title="Settings for PBS Packages"
+grid 1 4
+  label text=View: font=bold
+  button text=Docs func=openFile action=PBSoptGUI.pdf
+  button text="R Code" func=openFile action=PBSoptGUI.r
+  button text=Window func=openFile action=PBSoptGUI.txt
+
+button text="Load Saved Settings" func=loadPrevFile
+
+label text=Extensions: font=bold
+vector length=3 names="pdf txt r"\
+  labels="'.pdf' '.txt' '.r' "\
+  values="evince gedit gedit" vertical=T mode=character
+
+#grid 2 1
+#  check name=setPath checked=T text="set as current directory" 
+#  entry name=defaultPath value="Enter path to project directory" mode=character
+
+grid 2 1
+  check name=saveChanges checked=T text="save changes"  
+
+button text="Done" func=setChanges
