@@ -9,12 +9,14 @@ grid 1 2
   label text="Body 1:" font=bold
   vector length=5 names="m1 wx1 wy1 wu1 wv1"\
     labels="'m' 'x' 'y' 'u' 'v'"\
-    values="1 1 1 0 0" vertical=T
+    values="1 1 1 1 -1" vertical=T
   grid 2 1
   label text="Body 2:" font=bold
   vector length=5 names="m2 wx2 wy2 wu2 wv2"\
     labels="'m' 'x' 'y' 'u' 'v'"\
-    values="1 2 2 0 0" vertical=T
-grid 1 1
-  button text=Plot func=calcTraj font=bold
-    
+    values="1 -1 -1 -1 1" vertical=T
+  entry name=nt label=Steps value=20 width=10
+grid 1 2
+  button text=Traj func=plotTraj font=bold
+  button text=Pairs func=plotPairs font=bold
+
