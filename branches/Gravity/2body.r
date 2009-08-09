@@ -4,6 +4,10 @@
 #*********************************************************************************************
 #R code for displaying the 2-body problem
 #*********************************************************************************************
+#TODO:
+#make trajectory time-dependent
+#what happens if they hit the same point? they stop moving
+#
 
 calcGrad <- function(t, y, parms) { # gradient from Newton's law
   # unpack the states and parms
@@ -24,11 +28,38 @@ calcGrad <- function(t, y, parms) { # gradient from Newton's law
 
 calcTraj <- function() {
   getWinVal(scope="L");
+
+  #center the system at (0, 0)
+  if(CM) {
+    newCoords <- centerSys(wx1, wy1, m1, wx2, wy2, m2);
+    wx1 <- newCoords[1]; wy1 <- newCoords[2]; wx2 <- newCoords[3]; wy2 <- newCoords[4];
+    };
+
+  #center the velocity so the system has a net momentum of 0
+  if(noMomentum) {
+    newVels <- centerSys(wu1, wv1, m1, wu2, wv2, m2)
+    wu1 <- newVels[1]; wv1 <- newVels[2]; wu2 <- newVels[3]; wv2 <- newVels[4];
+    };
+
   y0 <- c(x1=wx1, y1=wy1, x2=wx2, y2=wy2, u1=wu1, v1=wv1, u2=wu2, v2=wv2);
-  pars <- c(G=1, m1=m1, m2=m2);
-  times <- seq(0, nt, by=1);
+  pars <- c(G=G, m1=m1, m2=m2);
+  times <- seq(0, t, by=t/nt);
   out <- dde(y=y0, func=calcGrad, times=times, parms=pars);
   out <- as.data.frame(out); return(out); };
+
+#takes in the coordinates and masses of the points, outputs new coordinates of the points so that the center of mass remains at (0, 0)
+#also applicable for centering the velocity at 0
+#tested: works correctly
+centerSys <- function(a1, b1, m1, a2, b2, m2) { 
+  aNet <- (a1*m1 + a2*m2)/(m1+m2);
+  bNet <- (b1*m1 + b2*m2)/(m1+m2);
+  a1 <- a1 - aNet;
+  a2 <- a2 - aNet;
+  b1 <- b1 - bNet;
+  b2 <- b2 - bNet;
+  return(c(a1, b1, a2, b2))
+  };
+
 
 plotPairs <- function() {
   out <- calcTraj(); getWinVal(scope="L"); # we need nt
@@ -37,11 +68,14 @@ plotPairs <- function() {
    pairs(out, col=colours);
    invisible(out); };
 
-plotTraj <- function() {
-  out <- calcTraj(); x1 <- out[,1]; y1 <- out[,2]; x2 <- out[,3]; y2 <- out[,4];
+plotTraj <- function() {  
+  out <- calcTraj(); x1 <- out[,2]; y1 <- out[,3]; x2 <- out[,4]; y2 <- out[,5];
+  out <- calcTraj(); getWinVal(scope="L"); # we need nt
+  colours <- colorRampPalette(c("red", "orange", "yellow", 
+            "green", "blue"), space="Lab")(nt+1);
   xrng <- range(c(x1,x2)); yrng <- range(c(y1,y2));
-  plot(x1,y1,xlim=xrng,ylim=yrng,col="red");
-  points(x2,y2,col="blue"); invisible(out); };
+  plot(x1,y1,xlim=xrng,ylim=yrng,col=colours, pch=15);
+  points(x2,y2,col=colours, pch=16); invisible(out); };
 
 # Load PBS Modelling and initialize the GUI
 

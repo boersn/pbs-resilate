@@ -15,7 +15,12 @@ grid 1 2
   vector length=5 names="m2 wx2 wy2 wu2 wv2"\
     labels="'m' 'x' 'y' 'u' 'v'"\
     values="1 -1 -1 -1 1" vertical=T
-  entry name=nt label=Steps value=20 width=10
+  vector length=3 names="nt t G"\
+    labels="'Steps' 'time' 'G'"\
+    values="20 10 10"
+  grid 2 1
+    check name=CM checked=T text="Center of mass at (0,0)"
+    check name=noMomentum checked=T text="System momentum = 0"
 grid 1 2
   button text=Traj func=plotTraj font=bold
   button text=Pairs func=plotPairs font=bold
