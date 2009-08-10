@@ -1,11 +1,37 @@
 August 7, 2009 (Draft 1)
+August 9, 2009 (Draft 2)
 
-This branch of contains experimental code by Sanae Rosen to investigate particle movement under the influence of gravity. It may be become part of PBSresilate, because gravity seems to be a “lumping” influence on a complex system.
+This branch of PBSresilate contains experimental code by Sanae Rosen 
+and me to investigate Newtonian gravity. Our code may eventually 
+become part of the package, because a system of particles moving under 
+the influence gravity seems to illustrate "lumping" behaviour in a 
+complex system. The universe has stars, planetary sytems, star 
+clusters, galaxies, and other hierarchies of matter.
 
-I think we may need an initial normalizing calculation (perhaps optional) to ensure that the system has initial net momentum zero. That would ensure initial values for which the centre of gravity does not change. Relative velocities among the masses would be preserved, but the system momentum as a whole would not move.
+Buzz Holling considers "lumping" a generic feature of complex systems. 
+Is this an inevitable conseqence of Newton's laws? 
 
-Similarly, we could require that the centre of gravity lies at (x,y)=(0,0). This calculation would preserve relative positions, but shift the overall location so that the physical centre lies at the origin.
+We're using preliminary code for the "two-body" problem to explore the 
+feasibility of more complex code that would govern the movements of n 
+particles. Ultimately, we want to look for the emergence of "lumping" 
+among groups of particles that start with random distributions of 
+positions and velocities.
 
-The GUI related to PBSoptions could prove especially useful in Linux installations.
+Some technical issues have emerged so far.
+
+1. We need to allow flexible (relative) scales for mass, distance, and 
+time, as well as Newton's gravitational constant G.
+
+2. We need to "fix" gravity so that forces don't become infinite as 
+objects approach the same point in space. Our algorithms for solving 
+differential equations can't handle infinite values.
+
+3. Ideally, we should normalize intial values so the system has net 
+momentum zero and a center of mass at the origin. This can be done 
+while preserving relative positions and velocities in an arbitrary 
+initial configuration.
+
+Sanae's GUI related to PBSoptions could prove useful in Linux 
+installations.
 
 Jon Schnute
