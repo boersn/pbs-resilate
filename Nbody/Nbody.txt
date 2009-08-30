@@ -1,0 +1,17 @@
+window title="2-body problem"
+grid 1 4
+  label text=View: font=bold
+  button text=Docs func=openFile action=2-body.pdf
+  button text="R Code" func=openFile action=2body.r
+  button text=Window func=openFile action=2body.txt
+grid 3 1
+  vector length=3 names="nt t G"\
+    labels="'Steps' 'time' 'G'"\
+    values="20 10 100"
+  grid 2 1
+    check name=CM checked=T text="Center of mass at (0,0)"
+    check name=noMomentum checked=T text="System momentum = 0"
+  button text="Open Data Table" func=initDataTable font=bold
+      
+button text=Traj func=plotTraj font=bold
+
