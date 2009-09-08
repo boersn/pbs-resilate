@@ -4,7 +4,5 @@ I've found that sometimes you need to set the value of G fairly high in order fo
 
 TO DO:
 
-Add history function
-Make the positions and velocities randomly generated
 Deal with r = 0
 Figure out how to make the code more efficient?

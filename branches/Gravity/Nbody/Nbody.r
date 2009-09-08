@@ -2,11 +2,10 @@
 # Modified by Jon Schnute
 
 #*********************************************************************************************
-#R code for displaying the 2-body problem
+#R code for displaying the N-body problem
 #*********************************************************************************************
 #TODO:
-#make trajectory time-dependent
-#what happens if they hit the same point? they stop moving
+#what happens if they hit the same point?
 #
 
 calcGrad <- function(t, y0, parms) { # gradient from Newton's law
@@ -36,12 +35,32 @@ calcGrad <- function(t, y0, parms) { # gradient from Newton's law
   return(c(dx, dy, du, dv));  };
 
 
-#Accept the data table.  Find out the number of particles.
-#Eventually, check that the data is correct/workable
-initDataTable <- function(){
-  rawData <<- data.frame(mass=1, x=c(0,0,1), y=c(0,1,0), u=c(0,0,1), v=c(-1,1,0)); #global variable
-  data.entry(rawData)  
-  n <<- length(rawData$mass)#how many entries
+#FIX
+viewDataTable <- function(){
+  data.entry(rawData)
+  };
+  
+  
+genData <- function(){
+  getWinVal(scope="L");
+  
+  #Generate masses
+  if(massDist==1) { #use lognormal dist
+    mass <- rlnorm(n, meanlog=massMean, sdlog = massSD);
+    }
+  else { #all masses = 1
+    mass <- rep(1, n); 
+    }
+    
+  #generate positions (from -10 to 10)
+  x <- runif(n, -10, 10);
+  y <- runif(n, -10, 10);
+  
+  #generate velocities
+  v <- rlnorm(n, meanlog=velMean, sdlog=velSD);
+  u <- rlnorm(n, meanlog=velMean, sdlog=velSD);
+  
+  rawData <<- data.frame(x=x, y=y, u=u, v=v, mass=mass) #GLOBAL VARIABLE
   };
   
 
@@ -49,16 +68,18 @@ calcTraj <- function() {
   getWinVal(scope="L");
 
 #  #center the system at (0, 0)
-#  if(CM) {
-#    newCoords <- centerSys(wx1, wy1, m1, wx2, wy2, m2);
-#    wx1 <- newCoords[1]; wy1 <- newCoords[2]; wx2 <- newCoords[3]; wy2 <- newCoords[4];
-#    };
+  if(CM) {
+    newCoords <- centerSys(rawData$x, rawData$y, rawData$m);
+    rawData$x <- newCoords[1:n];
+    rawData$y <- newCoords[(1+n):(2*n)];
+    };
 
   #center the velocity so the system has a net momentum of 0
-#  if(noMomentum) {
-#    newVels <- centerSys(wu1, wv1, m1, wu2, wv2, m2)
-#    wu1 <- newVels[1]; wv1 <- newVels[2]; wu2 <- newVels[3]; wv2 <- newVels[4];
-#    };
+  if(noMomentum) {
+    newCoords <- centerSys(rawData$u, rawData$v, rawData$m);
+    rawData$u <- newCoords[1:n];
+    rawData$v <- newCoords[(1+n):(2*n)];
+    };
 
   y0 <- c(rawData$x, rawData$y, rawData$u, rawData$v) #packing the data
   pars <- c(n=n, G=G, rawData$mass);
@@ -68,15 +89,13 @@ calcTraj <- function() {
 
 #takes in the coordinates and masses of the points, outputs new coordinates of the points so that the center of mass remains at (0, 0)
 #also applicable for centering the velocity at 0
-#centerSys <- function(a1, b1, m1, a2, b2, m2) { 
-#  aNet <- (a1*m1 + a2*m2)/(m1+m2);
-#  bNet <- (b1*m1 + b2*m2)/(m1+m2);
-#  a1 <- a1 - aNet;
-#  a2 <- a2 - aNet;
-#  b1 <- b1 - bNet;
-#  b2 <- b2 - bNet;
-#  return(c(a1, b1, a2, b2))
-#  };
+centerSys <- function(a, b, m) { 
+  aNet <- sum(a*m)/sum(m);
+  bNet <- sum(b*m)/sum(m);
+  a <- a - aNet;
+  b <- b - bNet;
+  return(c(a, b))
+  }; 
 
 
 plotTraj <- function() {  

@@ -1,17 +1,40 @@
 window title="2-body problem"
-grid 1 4
+grid 1 4 
   label text=View: font=bold
   button text=Docs func=openFile action=2-body.pdf
   button text="R Code" func=openFile action=2body.r
   button text=Window func=openFile action=2body.txt
-grid 3 1
+
+vector length=1 names="n" labels="'Number of particles:'" values="2"
+
+
+
+grid 4 1 relief=groove
+  label text=Mass: font=bold
+  radio name=massDist value=0 text="m=1 for all"
+  radio name=massDist value=1 text="lognormal distribution"
+  vector length=2 names="massMean massSD"\
+    labels="'meanLog' 'sdLog'"\
+    values="0 1"
+
+grid 2 1 relief=groove
+  label text=Velocity: font=bold padx=28
+  vector length=2 names="velMean velSD"\
+    labels="'meanLog' 'sdLog'"\
+    values="0 1" vertical=TRUE
+
+grid 2 1
   vector length=3 names="nt t G"\
     labels="'Steps' 'time' 'G'"\
     values="20 10 100"
   grid 2 1
     check name=CM checked=T text="Center of mass at (0,0)"
     check name=noMomentum checked=T text="System momentum = 0"
-  button text="Open Data Table" func=initDataTable font=bold
-      
-button text=Traj func=plotTraj font=bold
+
+button text="Generate Particles" func=genData font=bold
+button text="Open Data Table" func=viewDataTable font=bold      
+button text=Trajectory func=plotTraj font=bold
+grid 2 1 pady=10
+  label text=History font=Bold
+  history name="history"
 
