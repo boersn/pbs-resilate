@@ -11,7 +11,7 @@ runResilate =  function () {
 	edir=.getPkgPath(pkg,"examples")            # examples directory
 	tdir=tempdir(); tdir=gsub("\\\\","/",tdir)  # temporary directory
 	temp=readLines(paste(wdir,"/resilateWin.txt",sep="")); 
-	mods=getPrefix(".r",edir)
+	mods=findPrefix(".r",edir)
 	mrad=character(0)
 	for (i in mods) 
 		mrad=c(mrad,paste("\tradio name=model mode=character sticky=W function=resilate ",
