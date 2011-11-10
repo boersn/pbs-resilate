@@ -1,5 +1,8 @@
 PBSresilate Changes
 ===================
+0.15  2011-11-10  Rowan
+  - R-2.14.0 requires namespace and loading via '.onLoad'. (RH 11/10)
+
 0.14.12  2009-02-10  Jon
   - Changed getPrefix to findPrefix
   - Added revision number to the version
