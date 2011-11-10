@@ -1,6 +1,6 @@
 Package: PBSresilate
-Version: 0.14.12
-Date: 2009-09-10
+Version: 0.15
+Date: 2011-11-10
 Title: PBSresilate - Explorations of complexity and resilience
 Author: Jon T. Schnute <Jon.Schnute@dfo-mpo.gc.ca>,
   Rowan Haigh <Rowan.Haigh@dfo-mpo.gc.ca>
@@ -12,3 +12,4 @@ Description: This package uses an interactive GUI to control solvers,
   The current name reflects resilience theory and emphasizes a close 
   association with other PBS packages, particularly 'PBSmodelling'.
 License: GPL (>= 2)
+
