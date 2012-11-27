@@ -1,5 +1,14 @@
 PBSresilate Changes
-===================
+===================================
+Authors:  JTS = Jon T. Schnute
+          RH  = Rowan Haigh
+-----------------------------------
+
+0.16  2012-11-27
+  - Updated to be compatible with R-2.15.0 and higher. (RH 11/27)
+  - Added call to 'utils::globalVariables' in zzz.r to indicate 'no visible bindings' when checking. (RH 11/27)
+  - Changed Jon's email address. (RH 11/27)
+
 0.15  2011-11-10  Rowan
   - R-2.14.0 requires namespace and loading via '.onLoad'. (RH 11/10)
 
