@@ -4,6 +4,11 @@ Authors:  JTS = Jon T. Schnute
           RH  = Rowan Haigh
 -----------------------------------
 
+0.17  2013-06-18
+  - Modified function `.onClose` to save each model's control object `PBSresi` to a binary RDA file in the user's temporary working directory. (RH 6/18)
+  - Modified code to use a temporary environment called `.PBSresEnv`. (RH 6/17)
+  - Modified NAMESPACE and rebuilt just for compatibility with R-3.0.0. (RH 4/19)
+
 0.16  2012-11-27
   - Updated to be compatible with R-2.15.0 and higher. (RH 11/27)
   - Added call to 'utils::globalVariables' in zzz.r to indicate 'no visible bindings' when checking. (RH 11/27)

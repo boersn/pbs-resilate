@@ -1,4 +1,7 @@
-.onLoad <- function(lib,pkg)
+# Taking cue from Roger Bivand's maptools:
+.PBSresEnv <- new.env(FALSE, parent=globalenv())  # be sure to exportPattern("^\\.PBS") in NAMESPACE
+
+.onAttach <- function(lib,pkg)
 {
 	pkg_info <- utils::sessionInfo( package="PBSresilate" )$otherPkgs$PBSresilate
 	if( is.character( pkg_info$Packaged ) )
@@ -10,7 +13,7 @@
 	
 	packageStartupMessage("
 -----------------------------------------------------------
-PBSresilate ", pkg_info$Version, " -- Copyright (C) 2008-2012 Fisheries and Oceans Canada
+PBSresilate ", pkg_info$Version, " -- Copyright (C) 2008-2013 Fisheries and Oceans Canada
 
 A basic user guide 'PBSresilate.pdf' is located at 
 ", userguide_path, "
@@ -26,10 +29,14 @@ Type 'runResilate()' to start the model control GUI.
 
 ")
 }
+.onUnload <- function(libpath) {
+	rm(.PBSresEnv)
+}
 
 # No Visible Bindings
 # ===================
 if(getRversion() >= "2.15.1") utils::globalVariables(names=c(
+	".PBSmod",
 	"addXY","addXZ","addYZ",
 	"histclr",
 	"myGrad",
