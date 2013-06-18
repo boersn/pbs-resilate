@@ -1,4 +1,4 @@
-#runResilate----------------------------2009-07-13
+#runResilate----------------------------2013-06-18
 # Start the model choice for resilate (dynamic).
 #-----------------------------------------------RH
 runResilate =  function () {
@@ -22,10 +22,12 @@ runResilate =  function () {
 	twdf=paste(tdir,"/resilateWin.txt",sep="")
 	writeLines(temp,con=twdf)
 	createWin(twdf)
+	if (exists("PBSresi",envir=.PBSresEnv,inherits=FALSE))
+		rm(PBSresi,envir=.PBSresEnv) # clear previous control object if it exists
 	invisible() }
-#--------------------------------------runResilate
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~runResilate
 
-#resilate-------------------------------2009-007-13
+#resilate-------------------------------2013-06-17
 # Resilate the universe.
 #-----------------------------------------------RH
 resilate =  function (model=NULL,hnam=NULL) {
@@ -34,11 +36,12 @@ resilate =  function (model=NULL,hnam=NULL) {
 	if (!require(deSolve))      showAlert("Intall package 'deSolve'")
 	if (!require(rgl))          showAlert("Intall package 'rgl'")
 	pkg="PBSresilate"
-	assign("PBSresi",list(pkg=pkg,func="resilate"),envir=.GlobalEnv)
-	if (is.null(model) && exists(".PBSmod",where=1) && !is.null(.PBSmod[["window"]]) ) 
+	if (is.null(model) && exists(".PBSmod",where=.PBSmodEnv) && !is.null(tcall(.PBSmod)[["window"]]) ) 
 		model=getWinVal(winName="window")$model
 	if (is.null(model) || model=="" || model=="none") model="lorenz"
-	packList("model","PBSresi")
+	lastmodel = ifelse(is.null(rtcall(PBSresi)$model),model,rtcall(PBSresi)$model)
+	assign("PBSresi",list(pkg=pkg,call=match.call()),envir=.PBSresEnv)
+	packList(c("model","lastmodel"),"PBSresi",tenv=.PBSresEnv)
 
 	wdir=.getPkgPath(pkg,"win")                 # window directory
 	edir=.getPkgPath(pkg,"examples")            # examples directory
@@ -62,18 +65,14 @@ resilate =  function (model=NULL,hnam=NULL) {
 	createWin(wtmp)
 	#.calcGrad()
 	invisible() }
-#-----------------------------------------resilate
-
-.onClose=function() { 
-	if (exists("PBSresi",envir=.GlobalEnv)) {
-		save("PBSresi",file="PBSresi.rda",envir=.GlobalEnv) } }
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~resilate
 
 #.calcGrad------------------------------2009-07-13
 # Calculate the gradient
 #-------------------------------------------ACB/RH
 .calcGrad <- function() {
 	getWinVal(winName="modwin",scope="L")  #extract variables from modwin GUI
-	model=PBSresi$model
+	model=rtcall(PBSresi)$model
 	edir=.getPkgPath("PBSresilate","examples")
 	lenv=sys.frame(sys.nframe()) # local environment
 	sys.source(paste(edir,"/",model,".r",sep=""),envir=lenv)
@@ -95,8 +94,7 @@ resilate =  function (model=NULL,hnam=NULL) {
 	myCalc=function(y) { val=myGrad(t=0,y=y,parms=NULL)[[1]]; names(val)=c("dy1","dy2","dy3"); return(val) }
 	xdy = t(apply(x[,2:4],1,myCalc))
 	x=cbind(x,xdy)
-	packList(c("x","states"),"PBSresi")
-	#PBSresi$x <<- x; PBSresi$states<<-states
+	packList(c("x","states"),"PBSresi",tenv=.PBSresEnv)
 	#.plotResi()
 	invisible() }
 #----------------------------------------.calcGrad
@@ -130,10 +128,10 @@ resilate =  function (model=NULL,hnam=NULL) {
 		points(x,y,pch=21,col=0,bg=clrs,cex=0.5) }
 
 	getWinVal(winName="modwin",scope="L")     #extract variables from modwin GUI
-	if (!exists("PBSresi",where=1) || is.null(PBSresi$x)) {
+	if (!exists("PBSresi",envir=.PBSresEnv) || is.null(rtcall(PBSresi)$x)) {
 		showAlert("Calculate the gradient first."); return() }
 	else {
-		unpackList(PBSresi,scope="L")
+		unpackList(rtcall(PBSresi),scope="L")
 		lenv=sys.frame(sys.nframe()) # local environment
 		edir=.getPkgPath("PBSresilate","examples")
 		fld0=c("time","y1","y2","y3","dy1","dy2","dy3") # basic field from solver
@@ -144,7 +142,7 @@ resilate =  function (model=NULL,hnam=NULL) {
 		#flds=names(x); useflds=intersect(flds,see)
 		x=x[,use]; names(x)=see; n=nrow(x); xnew=x
 		clrs=colorRampPalette(c("red", "orange","yellow","green","blue"),space="Lab")(n)
-		packList(c("xnew","clrs"),"PBSresi")
+		packList(c("xnew","clrs"),"PBSresi",tenv=.PBSresEnv)
 		#PBSresi$xnew<<-x; PBSresi$clrs <<- clrs
 		if (p23==2) {
 			resetGraph()
@@ -156,9 +154,9 @@ resilate =  function (model=NULL,hnam=NULL) {
 		} else if (p23==3) {
 			if (sum(xyz)!=3) {showAlert("Choose 3 states"); return()}
 			xs=apply(x,2,xscale); xs=as.data.frame(xs,row.names=rownames(x))
-			xsc=sapply(x,xscale,simplify=FALSE)#; PBSresi$xsc<<-xsc
-			xs=as.data.frame(xsc)#; PBSresi$xs<<-xs
-			packList(c("xsc","xs"),"PBSresi")
+			xsc=sapply(x,xscale,simplify=FALSE)
+			xs=as.data.frame(xsc)
+			packList(c("xsc","xs"),"PBSresi",tenv=.PBSresEnv)
 			#par3d(windowRect=c(70,90,700,720)) # cannot control the size of the initial 3D window
 			plot3d(xs,col=clrs,size=size3d,top=TRUE,type=type3d,axes=FALSE,xlab="",ylab="",zlab="") # s=spheres, p=points, l=lines
 			for (i in 1:3) {
@@ -173,8 +171,33 @@ resilate =  function (model=NULL,hnam=NULL) {
 		}
 	}
 }
-#----------------------------------------.plotResi
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.plotResi
 
 .getPkgPath=function(pkg="PBSresilate", dir="examples"){
 	return(paste(system.file(package=pkg),dir,sep="/")) }
+
+.onClose=function() { 
+	if (exists("PBSresi",envir=.PBSresEnv)) {
+		tmpdir = 
+			if (!is.na(Sys.getenv()["R_TEMP"]))  Sys.getenv()["R_TEMP"]
+			else if (!is.na(Sys.getenv()["TEMP"]))  Sys.getenv()["TEMP"]
+			else if (!is.na(Sys.getenv()["TMP"]))  Sys.getenv()["TMP"]
+			else tempdir()
+		rtget(PBSresi); onam = paste("PBSresi-",PBSresi$lastmodel,"-(",gsub(" ","-",gsub(":","-",Sys.time())),").rda",sep="")
+		save("PBSresi",file=paste(tmpdir,onam,sep="/"))
+		#print(paste("`",onam,"` saved to `",tmpdir,"`",sep=""))
+} }
+
+#rtget----------------------------------2013-06-17
+# Provide PBSresilate wrappers for PBSmodelling functions tget/tcall/tprint/tput/lisp
+#-----------------------------------------------RH 
+rtget   = function(...) {tget  (..., penv=parent.frame(), tenv=.PBSresEnv)}
+rtcall  = function(...) {tcall (..., penv=parent.frame(), tenv=.PBSresEnv)}
+rtprint = function(...) {tprint(..., penv=parent.frame(), tenv=.PBSresEnv)}
+rtput   = function(...) {tput  (..., penv=parent.frame(), tenv=.PBSresEnv)}
+rlisp   = function(...) {lisp  (..., pos =.PBSresEnv)}
+
+# functions called from window description files
+#.win.onClose  = function(){ ttcall(.onClose)() }
+#.win.runModHelperQuit = function(){ ttcall(.runModHelperQuit)() }
 
