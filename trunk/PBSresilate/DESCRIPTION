@@ -1,15 +1,16 @@
 Package: PBSresilate
-Version: 0.17
-Date: 2013-06-18
-Title: PBSresilate - Explorations of complexity and resilience
+Version: 0.18
+Date: 2015-06-15
+Title: Explorations of Complexity and Resilience
 Author: Jon T. Schnute <schnutej-dfo@shaw.ca>,
-  Rowan Haigh <Rowan.Haigh@dfo-mpo.gc.ca>
+   Rowan Haigh <Rowan.Haigh@dfo-mpo.gc.ca>
 Maintainer: Jon Schnute <schnutej-dfo@shaw.ca>
 Depends: R (>= 2.15.0), PBSmodelling, PBSddesolve, deSolve, rgl
-Description: This package uses an interactive GUI to control solvers, 
-  calculate states, and display results in 2D or 3D plots for 
-  published 3-state models (specifically their derivative formulae).
-  The current name reflects resilience theory and emphasizes a close 
-  association with other PBS packages, particularly 'PBSmodelling'.
+Description: Offers an interactive GUI to control solvers, calculate states, and
+   display results in 2D or 3D plots for published 3-state models (specifically
+   their derivative formulae). The current name reflects resilience theory and
+   emphasizes a close association with other PBS packages, particularly
+   `PBSmodelling'.
 License: GPL (>= 2)
+URL: https://code.google.com/p/pbs-resilate/
 
