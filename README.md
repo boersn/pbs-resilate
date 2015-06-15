@@ -2,3 +2,6 @@ This R package uses visual tools to investigate properties of complex models. In
 
 **PBSresilate** belongs to a suite of R packages described at [http://github.com/pbs-software/](http://github.com/pbs-software/). It depends particularly on **PBSmodelling** ([http://github.com/pbs-software/pbs-modelling/](http://github.com/pbs-software/pbs-modelling/)). 
 
+Users interested in Buzz Holling and his work on resilience may wish to consult the web links shown below:
+* [Buzz Holling - Wikipedia](https://en.wikipedia.org/wiki/C._S._Holling)
+* [Resilience Alliance](http://www.resalliance.org)
