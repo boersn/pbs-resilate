@@ -4,6 +4,9 @@ Authors:  JTS = Jon T. Schnute
           RH  = Rowan Haigh
 -----------------------------------
 
+1.0  2015-06-30
+  • Updated package to deal with R's latest requirements. (RH 150630)
+
 0.18  2015-06-15
   • Last update to Google Code before transferring pbs-resilate repository to GitHub. (RH 150615)
 

@@ -1,0 +1,73 @@
+\documentclass[letter]{article}
+%\VignetteIndexEntry{Introduction to PBSresilate}
+%\VignettePackage{PBSresilate}
+
+% For colors
+\usepackage{color}
+%\definecolor{red}{rgb}{0.8039216,0.2156863,0}
+\definecolor{red}{rgb}{1, 0, 0}
+\definecolor{green}{rgb}{0, 1, 0}
+\definecolor{blue}{rgb}{0, 0, 1}
+
+% Definitions
+\newcommand{\slan}{{\tt S}}
+\newcommand{\rlan}{{\tt R}}
+\newcommand{\pbsr}{{\tt PBSresilate}}
+\newcommand{\pbsm}{{\tt PBSmodelling}}
+\newcommand{\tcl}{{\tt Tcl/Tk}}
+\newcommand{\code}[1]{{\tt #1}}
+\newcommand{\ital}[1]{{\it #1}}
+\newcommand{\bold}[1]{{\bf #1}}
+\newcommand{\under}[1]{{\underline {#1}}}
+\newcommand{\red}[1]{{\textcolor{red} {#1}}}
+
+\usepackage{verbatim}
+\usepackage{hyperref}
+
+% Keep on one page
+\topmargin -1.0in \oddsidemargin 0.5in \evensidemargin 0.5in
+\textheight 9.0in \textwidth 5.5in
+
+\begin{document}
+
+\title{Introduction to PBSresilate}
+\author{Jon Schnute and Rowan Haigh}
+\maketitle
+
+\section{What is \pbsr{}?}
+
+\pbsr{} uses an interactive GUI to control solvers, calculate states, and display results in 2D or 3D plots for published 3-state models (specifically their derivative formulae).
+The current name reflects resilience theory and emphasizes a close association with other PBS packages, particularly \pbsm{}.
+
+\section{What is PBS?}
+
+The initials \bold{PBS} refer to the Pacific Biological Station, a major fisheries laboratory operated by Fisheries and Oceans Canada on the Pacific coast in Nanaimo, British Columbia, Canada.
+
+\section{Where is the User's Guide?}
+
+The R library directory \code{.../PBSresilate/doc} includes a very basic guide to the package functions.
+
+\section{What demos are available?}
+
+\pbsr{} includes five examples that can be chosen from a menu GUI invoked by the function \code{runResilate}. Note that the examples are run in the temporary working environment \code{.PBSresEnv}. The examples are:
+\begin{itemize}
+  \item \code{ludwig} -- Spruce Budworm (``Buzzworm'') Model
+  \item \code{edwards}  -- Zooplankton Mortality, Dynamical Behaviour of Plankton Populations
+  \item \code{hastings} -- Chaos in a Three-Species Food Chain
+  \item \code{lorenz}   -- Lorenz Model
+  \item \code{resilenz} -- Resilenz Model
+\end{itemize}
+
+\vspace*{2ex} \noindent {\bf \Large References} \vspace*{2ex}
+
+
+Edwards, A.M. and Brindley, J. (1999) Zooplankton mortality and the dynamical behaviour of plankton population models. \emph{Bulletin of Mathematical Biology} \bold{61}, 303--339.
+
+Hastings, A. and Powell, T. (1991) Chaos in a three-species food chain. \emph{Ecology} \bold{72(3)}, 896--903.
+
+Lorenz, E.N. (1963) Deterministic non-periodic flows. \emph{Journal of Atmospheric Science} \bold{20}, 130--141.
+
+Ludwig, D., Jones, D.D. and Holling, C.S. (1978) Qualitative analysis of insect outbreak systems: the spruce budworm and forest. \emph{The Journal of Animal Ecology} \bold{47(1)}, 315--332.
+
+
+\end{document}

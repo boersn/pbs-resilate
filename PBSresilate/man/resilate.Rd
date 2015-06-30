@@ -59,7 +59,7 @@ Hastings, A. and Powell, T. (1991) Chaos in a three-species food chain. \emph{Ec
 
 Lorenz, E.N. (1963) Deterministic non-periodic flows. \emph{Journal of Atmospheric Science}
   \bold{20}, 130--141. \cr
-  \url{http://planetmath.org/encyclopedia/LorenzEquation.html}
+  \url{http://dx.doi.org/10.1175/1520-0469(1963)020<0130:DNF>2.0.CO;2}
 
 Ludwig, D., Jones, D.D. and Holling, C.S. (1978) Qualitative analysis of insect outbreak systems: 
   the spruce budworm and forest. \emph{The Journal of Animal Ecology} \bold{47(1)}, 315--332.

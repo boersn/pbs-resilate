@@ -1,11 +1,11 @@
-#runResilate----------------------------2013-06-18
+#runResilate----------------------------2015-06-30
 # Start the model choice for resilate (dynamic).
 #-----------------------------------------------RH
 runResilate =  function () {
-	if (!require(PBSmodelling)) stop("!!!!!Install package PBSmodelling!!!!!")
-	if (!require(PBSddesolve))  showAlert("Intall package 'PBSddesolve'")
-	if (!require(deSolve))      showAlert("Intall package 'deSolve'")
-	if (!require(rgl))          showAlert("Intall package 'rgl'")
+	#if (!require(PBSmodelling)) stop("!!!!!Install package PBSmodelling!!!!!")
+	#if (!require(PBSddesolve))  showAlert("Intall package 'PBSddesolve'")
+	#if (!require(deSolve))      showAlert("Intall package 'deSolve'")
+	#if (!require(rgl))          showAlert("Intall package 'rgl'")
 	pkg="PBSresilate"
 	wdir=.getPkgPath(pkg,"win")                 # window directory
 	edir=.getPkgPath(pkg,"examples")            # examples directory
@@ -27,14 +27,14 @@ runResilate =  function () {
 	invisible() }
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~runResilate
 
-#resilate-------------------------------2013-06-17
+#resilate-------------------------------2015-06-30
 # Resilate the universe.
 #-----------------------------------------------RH
 resilate =  function (model=NULL,hnam=NULL) {
-	if (!require(PBSmodelling)) stop("!!!!!Install package PBSmodelling!!!!!")
-	if (!require(PBSddesolve))  showAlert("Intall package 'PBSddesolve'")
-	if (!require(deSolve))      showAlert("Intall package 'deSolve'")
-	if (!require(rgl))          showAlert("Intall package 'rgl'")
+	#if (!require(PBSmodelling)) stop("!!!!!Install package PBSmodelling!!!!!")
+	#if (!require(PBSddesolve))  showAlert("Intall package 'PBSddesolve'")
+	#if (!require(deSolve))      showAlert("Intall package 'deSolve'")
+	#if (!require(rgl))          showAlert("Intall package 'rgl'")
 	pkg="PBSresilate"
 	if (is.null(model) && exists(".PBSmod",where=.PBSmodEnv) && !is.null(tcall(.PBSmod)[["window"]]) ) 
 		model=getWinVal(winName="window")$model
@@ -86,7 +86,7 @@ resilate =  function (model=NULL,hnam=NULL) {
 		x <- dde(y=yinit, func=myGrad, times=seq(t0,t1,timestep), hbsize=0)
 	}
 	else if (solver=="deSolve") {
-		require(deSolve) || stop("deSolve is required")
+		#require(deSolve) || stop("deSolve is required")
 		x <- lsoda(y=yinit, times=seq(from=t0, to=t1, by=timestep), func=myGrad, parms=NULL, rtol=1e-6, atol=1e-4)
 		x <- as.data.frame(x)
 	}
@@ -200,4 +200,6 @@ rlisp   = function(...) {lisp  (..., pos =.PBSresEnv)}
 # functions called from window description files
 #.win.onClose  = function(){ ttcall(.onClose)() }
 #.win.runModHelperQuit = function(){ ttcall(.runModHelperQuit)() }
+
+
 

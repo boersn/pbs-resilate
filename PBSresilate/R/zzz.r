@@ -13,7 +13,7 @@
 	
 	packageStartupMessage("
 -----------------------------------------------------------
-PBSresilate ", pkg_info$Version, " -- Copyright (C) 2008-2013 Fisheries and Oceans Canada
+PBSresilate ", pkg_info$Version, " -- Copyright (C) 2008-2015 Fisheries and Oceans Canada
 
 A basic user guide 'PBSresilate.pdf' is located at 
 ", userguide_path, "
@@ -38,10 +38,13 @@ Type 'runResilate()' to start the model control GUI.
 if(getRversion() >= "2.15.1") utils::globalVariables(names=c(
 	".PBSmod",
 	"addXY","addXZ","addYZ",
-	"histclr",
+	"box",
+	"colorRampPalette",
+	"hist","histclr",
 	"myGrad",
-	"p23","PBSresi",
-	"size2d","size3d","solver","states",
+	"p23","pairs","par","PBSresi","points",
+	"rect",
+	"segments","size2d","size3d","solver","states",
 	"t0","t1","type3d",
 	"xyz",
 	"y1","y2","y3"
