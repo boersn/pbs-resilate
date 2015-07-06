@@ -5,3 +5,6 @@ This R package uses visual tools to investigate properties of complex models. In
 Users interested in Buzz Holling and his work on resilience may wish to consult the web links shown below:
 * [Buzz Holling - Wikipedia](https://en.wikipedia.org/wiki/C._S._Holling)
 * [Resilience Alliance](http://www.resalliance.org)
+
+Test by Jon
+
