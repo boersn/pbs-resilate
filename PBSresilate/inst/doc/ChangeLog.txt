@@ -4,6 +4,9 @@ Authors:  JTS = Jon T. Schnute
           RH  = Rowan Haigh
 -----------------------------------
 
+1.02 2015-07-07
+  • First official version on GitHub (JTS 150707)
+
 1.0  2015-06-30
   • Updated package to deal with R's latest requirements. (RH 150630)
 
