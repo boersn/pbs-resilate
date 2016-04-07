@@ -12,5 +12,5 @@ Description: Offers an interactive GUI to control solvers, calculate states, and
    emphasizes a close association with other PBS packages, particularly
    `PBSmodelling'.
 License: GPL (>= 2)
-URL: https://code.google.com/p/pbs-resilate/
+URL: https://github.com/pbs-software/pbs-resilate
 
