@@ -10,10 +10,11 @@
 		pkg_date  <- date()
 	
 	userguide_path <- system.file( "doc/PBSresilate.pdf", package = "PBSresilate" )
+	year <- substring(date(),nchar(date())-3,nchar(date()))
 	
 	packageStartupMessage("
 -----------------------------------------------------------
-PBSresilate ", pkg_info$Version, " -- Copyright (C) 2008-2015 Fisheries and Oceans Canada
+PBSresilate ", pkg_info$Version, " -- Copyright (C) 2008-",year," Fisheries and Oceans Canada
 
 A basic user guide 'PBSresilate.pdf' is located at 
 ", userguide_path, "
@@ -22,7 +23,7 @@ Packaged on ", pkg_date, "
 Pacific Biological Station, Nanaimo
 
 All available PBS packages can be found at
-http://code.google.com/p/pbs-software/
+https://github.com/pbs-software
 
 Type 'runResilate()' to start the model control GUI.
 -----------------------------------------------------------
@@ -38,13 +39,10 @@ Type 'runResilate()' to start the model control GUI.
 if(getRversion() >= "2.15.1") utils::globalVariables(names=c(
 	".PBSmod",
 	"addXY","addXZ","addYZ",
-	"box",
-	"colorRampPalette",
-	"hist","histclr",
+	"histclr",
 	"myGrad",
-	"p23","pairs","par","PBSresi","points",
-	"rect",
-	"segments","size2d","size3d","solver","states",
+	"p23","PBSresi",
+	"size2d","size3d","solver","states",
 	"t0","t1","type3d",
 	"xyz",
 	"y1","y2","y3"

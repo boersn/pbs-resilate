@@ -4,91 +4,131 @@ Authors:  JTS = Jon T. Schnute
           RH  = Rowan Haigh
 -----------------------------------
 
+1.1.0 (2018-08-22) [Rcheck=T, Rbuild=T]
+  * Maintenance
+    + Routine check for compatibility issues.
+    + Recompiled `PBSresilate.pdf' (RH 180822)
+    + Removed `index.html' and added `Links.html' (RH 180821)
+    + Changed backticks ` in DESCRIPTION to single quotes ' (Kurt Hornik 160920)
+
+1.03 2015-07-09
+  * Maintenance
+    + Added previously broken link to README.md (JTS 150709)
+
 1.02 2015-07-07
-  • First official version on GitHub (JTS 150707)
+  * Maintenance
+    + First official version on GitHub (JTS 150707)
 
 1.0  2015-06-30
-  • Updated package to deal with R's latest requirements. (RH 150630)
+  * Maintenance
+    + Updated package to deal with R's latest requirements. (RH 150630)
 
 0.18  2015-06-15
-  • Last update to Google Code before transferring pbs-resilate repository to GitHub. (RH 150615)
+  * Maintenance
+    + Last update to Google Code before transferring pbs-resilate repository to GitHub. (RH 150615)
 
 0.17  2013-06-18
-  • Modified function `.onClose` to save each model's control object `PBSresi` to a binary RDA file in the user's temporary working directory. (RH 130618)
-  • Modified code to use a temporary environment called `.PBSresEnv`. (RH 130617)
-  • Modified NAMESPACE and rebuilt just for compatibility with R-3.0.0. (RH 130419)
+  * R code
+    + Modified function `.onClose` to save each model's control object `PBSresi` to a binary RDA file in the user's temporary working directory. (RH 130618)
+    + Modified code to use a temporary environment called `.PBSresEnv`. (RH 130617)
+  * Maintenance
+    + Modified NAMESPACE and rebuilt just for compatibility with R-3.0.0. (RH 130419)
 
 0.16  2012-11-27
-  • Updated to be compatible with R-2.15.0 and higher. (RH 121127)
-  • Added call to 'utils::globalVariables' in zzz.r to indicate 'no visible bindings' when checking. (RH 121127)
-  • Changed JTS's email address. (RH 121127)
+  * Maintenance
+    + Updated to be compatible with R-2.15.0 and higher. (RH 121127)
+    + Added call to 'utils::globalVariables' in zzz.r to indicate 'no visible bindings' when checking. (RH 121127)
+    + Changed JTS's email address. (RH 121127)
 
 0.15  2011-11-10  RH
-  • R-2.14.0 requires namespace and loading via '.onLoad'. (RH 111110)
+  * Maintenance
+    + R-2.14.0 requires namespace and loading via '.onLoad'. (RH 111110)
 
 0.14.12  2009-02-10  JTS
-  • Changed getPrefix to findPrefix
-  • Added revision number to the version
-  • Revised package title
+  * R code
+    + Changed getPrefix to findPrefix
+  * Maintenance
+    + Added revision number to the version
+    + Revised package title
 
 0.14  2009-07-13  RH
-  • Removed redundant & deprecated functions (.isReallyNull, convSlashes, doAction, showPacks, viewCode, .findPrefix)
-  • Removed usage of "<<-"; replaced with 'packList()'.
-  • Changed call from button 'R code' to invoke 'viewCode("PBSresilate").
+  * R code
+    + Removed redundant & deprecated functions (.isReallyNull, convSlashes, doAction, showPacks, viewCode, .findPrefix)
+    + Removed usage of "<<-"; replaced with 'packList()'.
+    + Changed call from button 'R code' to invoke 'viewCode("PBSresilate").
 
 0.13  2009-02-18  JTS
-  • Added new history files and revised PDFs (lorenz, ludwig. resilenz).
+  * GUI code
+    + Added new history files and revised PDFs (lorenz, ludwig. resilenz).
 
 0.12  2009-02-18  RH
-  • Added new text box to History section.
-  • Revised code for a few bugs.
+  * GUI code
+    + Added new text box to History section.
+  * R code
+    + Revised code for a few bugs.
 
 0.11  2009-02-17  RH
-  • Moved the gradient functions, window description files, history files, and support documents to the 'examples' directory.
-  • Made 'runResilate()' dynamic, choosing models from R-code (gradient functions) in 'examples'.
-  • Added function 'showPacks()' to check if CRAN packages used by PBS packages are installed on user's system (JTS).
-  • Added helper functions '.getPkgPath()' and '.findPrefix()'.
-  • Added capability to load history files from the 'examples' directory.
-  • Removed 'automatic' nature of GUIs to calculate gradients and plot results (JTS).
+  * R code
+    + Moved the gradient functions, window description files, history files, and support documents to the 'examples' directory.
+    + Made 'runResilate()' dynamic, choosing models from R-code (gradient functions) in 'examples'.
+    + Added function 'showPacks()' to check if CRAN packages used by PBS packages are installed on user's system (JTS).
+    + Added helper functions '.getPkgPath()' and '.findPrefix()'.
+    + Added capability to load history files from the 'examples' directory.
+    + Removed 'automatic' nature of GUIs to calculate gradients and plot results (JTS).
 
 0.10  2009-02-16  RH
-  • Revised the GUI to be more horizontal.
-  • Added new function "runResilate()" to create a control GUI that passses models to 'resilate()'.
-  • Added functions (from PBSadmb) 'convSlashes', 'doAction', and 'viewCode'. These will eventually be housed in PBSmodelling.
-  • Added runResilate as a demo.
+  * GUI code
+    + Revised the GUI to be more horizontal.
+  * R code
+    + Added new function "runResilate()" to create a control GUI that passses models to 'resilate()'.
+    + Added functions (from PBSadmb) 'convSlashes', 'doAction', and 'viewCode'. These will eventually be housed in PBSmodelling.
+    + Added runResilate as a demo.
 
 0.09  2009-02-13  JTS
-  • Added resilenz model.
+  * Example
+    + Added resilenz model.
 
 0.08  2008-11-13  RH
-  • Revised .plotResi()' to produce more interesting panel plots in 'pairs()'.
-  • Revised the window description (GUI) files and 'resilate.Rd'.
+  * R code
+    + Revised .plotResi()' to produce more interesting panel plots in 'pairs()'.
+  * GUI code
+    + Revised the window description (GUI) files and 'resilate.Rd'.
 
 0.07  2008-11-06  RH
-  • Revised .plotResi()' to scale the states to (0:1) space before plotting, but retain original scales for labels.
-	Also, axis labels now occur on edges 'x--', 'y--', and 'z-+'.
+  * R code
+    + Revised .plotResi()' to scale the states to (0:1) space before plotting, but retain original scales for labels.
+      - Also, axis labels now occur on edges 'x--', 'y--', and 'z-+'.
 
 0.06  2008-11-05  RH
-  • Added new model (spruce buzzworm by Ludwig et al. 1978).
-  • Fixed Edwards' plankton model (Z term missing in first derivative, thanks Andy).
-  • Revised the GUI and code to allow the 3D version to plot either spheres, points, or lines.
-  • Replaced 'lorenzDoc.pdf' with actual published paper.
-  • Renamed '.plotReso()' to '.plotResi()'.
+  * Example
+    + Added new model (spruce buzzworm by Ludwig et al. 1978).
+    + Fixed Edwards' plankton model (Z term missing in first derivative, thanks Andy).
+    + Replaced 'lorenzDoc.pdf' with actual published paper.
+  * GUI code
+    + Revised the GUI and code to allow the 3D version to plot either spheres, points, or lines.
+  * R code
+    + Renamed '.plotReso()' to '.plotResi()'.
 
 0.05  2008-11-03  RH
-  • Changed 'resolate' to 'resilate' for package name and function (misunderstanding of JTS's new word).
-  • Changed use of old package 'odesolve' to new package 'deSolve' for 'lsoda()' function.
-  • Changed '.onClose()' to save global object 'PBSresi' to a binary file 'PBSresi.rda'.
+  * R code
+    + Changed 'resolate' to 'resilate' for package name and function (misunderstanding of JTS's new word).
+    + Changed use of old package 'odesolve' to new package 'deSolve' for 'lsoda()' function.
+    + Changed '.onClose()' to save global object 'PBSresi' to a binary file 'PBSresi.rda'.
 
 0.04  2008-10-31  RH
-  • Revised 'resolate()' to accept different 3-state models ('lorenz', 'hastings', 'edwards').
-  • Created separate GUIs for each model.
+  * R code
+    + Revised 'resolate()' to accept different 3-state models ('lorenz', 'hastings', 'edwards').
+  * GUI code
+    + Created separate GUIs for each model.
 
 0.03  2008-10-29  RH
-  • Revised 'resolate()' and 'resolate.Rd'.
+  * R code
+    + Revised 'resolate()' and 'resolate.Rd'.
 
 0.02  2008-10-28  RH
-  • Created package 'PBSresolate'.
+  * Maintenance
+    + Created package 'PBSresolate'.
 
 0.01  2008-10-28  RH
-  • Modified 'lorenz3d.r' to become 'resolate.r' (not a package).
+  * R code
+    + Modified 'lorenz3d.r' to become 'resolate.r' (not a package).

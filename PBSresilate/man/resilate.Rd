@@ -51,17 +51,27 @@ resilate(model=NULL, hnam=NULL)
   }
 }
 \references{
-Edwards, A.M. and Brindley, J. (1999) Zooplankton mortality and the dynamical behaviour of
-  plankton population models. \emph{Bulletin of Mathematical Biology} \bold{61}, 303--339.
+Edwards, A.M. and Brindley, J. (1999)
+  Zooplankton mortality and the dynamical behaviour of plankton population models.
+  \emph{Bulletin of Mathematical Biology} \bold{61}, 303--339.
 
-Hastings, A. and Powell, T. (1991) Chaos in a three-species food chain. \emph{Ecology} 
-  \bold{72(3)}, 896--903.
+Hastings, A. and Powell, T. (1991)
+  Chaos in a three-species food chain.
+  \emph{Ecology} \bold{72(3)}, 896--903.
 
-Lorenz, E.N. (1963) Deterministic non-periodic flows. \emph{Journal of Atmospheric Science}
-  \bold{20}, 130--141. \cr
-  \url{http://dx.doi.org/10.1175/1520-0469(1963)020<0130:DNF>2.0.CO;2}
+Lorenz, E.N. (1963)
+  \href{https://doi.org/10.1175/1520-0469(1963)020\%3C0130:DNF\%3E2.0.CO;2}{Deterministic non-periodic flows}.
+  \emph{Journal of Atmospheric Science} \bold{20}, 130--141.
 
-Ludwig, D., Jones, D.D. and Holling, C.S. (1978) Qualitative analysis of insect outbreak systems: 
-  the spruce budworm and forest. \emph{The Journal of Animal Ecology} \bold{47(1)}, 315--332.
+Ludwig, D., Jones, D.D. and Holling, C.S. (1978)
+  Qualitative analysis of insect outbreak systems: the spruce budworm and forest.
+  \emph{The Journal of Animal Ecology} \bold{47(1)}, 315--332.
+}
+\author{
+  \href{mailto:schnutej-dfo@shaw.ca}{Jon T. Schnute}, Scientist Emeritus, Nanaimo BC\cr
+  \href{mailto:rowan.haigh@dfo-mpo.gc.ca}{Rowan Haigh}, Program Head -- Offshore Rockfish\cr
+  Pacific Biological Station (PBS), Fisheries & Oceans Canada (DFO), Nanaimo BC\cr
+  \emph{opus locus}: Institute of Ocean Sciences (IOS), Sidney BC\cr
+  Last modified \code{Rd: 2018-08-21}
 }
 \keyword{hplot}
